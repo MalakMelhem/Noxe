@@ -7,6 +7,7 @@ import About from '../About/About';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
+import Guard from '../Guard/Guard';
 import {Routes,Route,useNavigate} from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import './App.css';
@@ -43,15 +44,17 @@ function App() {
       <Navbar isLogged={isLogged} logOut={logOut}/>
       <div className='container'>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='home' element={<Home />} />
-        <Route path='movies' element={<Movies />} />
-        <Route path='tv-shows' element={<TvShows />} />
-        <Route path='people' element={<People />}  />
-        <Route path='about' element={<About />} />
-        <Route path='login' element={<Login userData={userData}/>} />
-        <Route path='register' element={<Register />}/>
-        <Route path='*' element={<NotFound />}/>
+        <Route element={<Guard isLogged={isLogged}/>}>
+          <Route path='/' element={<Home />}></Route>
+          <Route path='home' element={<Home />} ></Route>
+          <Route path='movies' element={<Movies />}></Route>
+          <Route path='tv-shows' element={<TvShows />}></Route>
+          <Route path='people' element={<People />} ></Route>
+        </Route>
+        <Route path='about' element={<About />} ></Route>
+        <Route path='login' element={<Login userData={userData}/>}></Route>
+        <Route path='register' element={<Register />}></Route>
+        <Route path='*' element={<NotFound />}></Route>
       </Routes>
       </div>
     </>
